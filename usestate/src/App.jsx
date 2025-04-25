@@ -1,17 +1,22 @@
-import RestaurantsContainer from "./components/RestaurantsContainer";
-import { restaurants } from "./data/data.js"; 
-import { useState } from "react"; 
 import "./App.css";
+import { useState } from "react";
+import { restaurants } from "./data/data.js"; 
+import RestaurantsContainer from "./components/RestaurantsContainer.jsx"; 
+import RestaurantForm from "./components/RestaurantForm.jsx"; 
 
-// App is the root of our application and where we load in our components.
 function App() {
-  // creating state using the restaurants array
   const [restaurantState, setRestaurants] = useState([...restaurants]);
+
+  // function for adding a new restaurant
+  const addRestaurant = (newRestaurant) => {
+    // using setRestaurants to update the state dynamically
+    setRestaurants((prevState) => [...prevState, newRestaurant]);
+  };
 
   return (
     <div className="App">
-      {/* passing down state as props */}
       <RestaurantsContainer restaurants={restaurantState} />
+      <RestaurantForm addRestaurant={addRestaurant} />
     </div>
   );
 }
